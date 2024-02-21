@@ -1,0 +1,37 @@
+package com.example.lasttry;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.lasttry.sev.Geminii;
+
+public class MainActivity extends AppCompatActivity {
+
+    public EditText editText;
+    public TextView textView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        String a = "hi";
+          textView = findViewById(R.id.textview);
+         editText = findViewById(R.id.editText);
+
+
+        Button button = findViewById(R.id.buttonAccessText);
+        button.setOnClickListener(v -> {
+            svcw(textView,editText);
+        });
+
+    }
+    public void svcw(TextView textView,EditText editText){
+        Geminii kotlinclass = new Geminii();
+        kotlinclass.someFunction(textView,editText);
+    }
+
+    }
