@@ -1,0 +1,48 @@
+package com.example.laston;
+
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationService;
+
+public class MainActivity extends AppCompatActivity {
+
+    public EditText username ;
+    public Button start ;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        username = findViewById(R.id.editext);
+        start = findViewById(R.id.button);
+
+        start.setOnClickListener(v -> {
+        Application application = getApplication() ; // Android's application context
+        long appID =1503924546 ;   // yourAppID
+        String appSign ="ef01b76918a5389dbfa0323579562c2c2c6ebe9481953914c9a7602dca50e751";  // yourAppSign
+        String userID = username.getText().toString().trim(); // yourUserID, userID should only contain numbers, English characters, and '_'.
+        String userName =username.getText().toString().trim();   // yourUserName
+
+        ZegoUIKitPrebuiltCallInvitationConfig callInvitationConfig = new ZegoUIKitPrebuiltCallInvitationConfig();
+
+        ZegoUIKitPrebuiltCallInvitationService.init(getApplication(), appID, appSign, "a", "a",callInvitationConfig);
+
+
+            Intent intent = new Intent(this,callingone.class);
+            intent.putExtra("usernamee",userName);
+            startActivity(intent);
+
+        });
+
+    }
+}
