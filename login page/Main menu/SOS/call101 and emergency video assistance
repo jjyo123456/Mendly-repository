@@ -1,0 +1,43 @@
+package com.example.recyclerview;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class se extends AppCompatActivity {
+
+    Button call101;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_se);
+        Button c = findViewById(R.id.h);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button previous = findViewById(R.id.previous);
+
+         Button call101 = findViewById(R.id.call101);
+         Button vd = findViewById(R.id.vd_doctor);
+
+         call101.setOnClickListener(v -> {
+             Uri uri = Uri.parse("tel:+101"); // missing 'http://' will cause crashed
+             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+             startActivity(intent);
+         });
+        
+         c.setOnClickListener(v -> {
+             Toast.makeText(this, "under construction", Toast.LENGTH_LONG).show();
+         });
+         previous.setOnClickListener(v -> {
+             Intent intent = new Intent(this,Main_menu.class);
+             startActivity(intent);
+         });
+
+
+
+    }
+}
