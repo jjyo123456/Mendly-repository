@@ -1,0 +1,60 @@
+package com.example.recyclerview;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class Main_menu extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_menu);
+        Button SOS =findViewById(R.id.SOS);
+        Button Blogs = findViewById(R.id.blogs);
+        Button ai_chatbot = findViewById(R.id.ai_chatbot);
+        Button video_call_doctor = findViewById(R.id.video_call_Doctor);
+        Button community = findViewById(R.id.community);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView t = findViewById(R.id.k);
+
+        String h = getIntent().getStringExtra("hd");
+        t.setText( "Welcome"+""+""+String.valueOf(h));
+
+
+//correct
+        SOS.setOnClickListener(v -> {
+            Intent intent = new Intent(this,se.class);
+            startActivity(intent);
+        });
+        //correct
+        Blogs.setOnClickListener(v -> {
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+        });
+        ai_chatbot.setOnClickListener(v -> {
+            Uri uri = Uri.parse("https://bard.google.com/chat"); // missing 'http://' will cause crashed
+          //  Intent intent = new Intent(this,Ai_chatbot_activity.class);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+
+        });
+        //correct
+        video_call_doctor.setOnClickListener(v -> {
+            //Uri uri = Uri.parse("https://chat.whatsapp.com/H4UBjNQEFHa8fw43Hejbbe"); // missing 'http://' will cause crashed
+            Intent intent = new Intent(this,setmeet.class);
+            startActivity(intent);
+        });
+
+        community.setOnClickListener(v -> {
+           // Uri uri = Uri.parse(" https://chat.whatsapp.com/H4UBjNQEFHa8fw43Hejbbe"); // missing 'http://' will cause crashed
+            Intent intent = new Intent(this, community.class);
+            startActivity(intent);
+        });
+
+    }
+}
