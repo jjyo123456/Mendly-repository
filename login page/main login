@@ -1,0 +1,74 @@
+package com.example.dtb;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import com.example.dtb.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+    public database1 contactdatabase ;
+   public  ArrayList<entityclass> contacts = new ArrayList<>();
+
+   public entityclass contact;
+
+
+   public Myadapter adapter;
+
+    ArrayList<entityclass> contactfinalarraylist ;
+
+    public ActivityMainBinding mainactivityviewbindingobject;
+    public MainActivityclickhandler MAinclickHandlr;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mainactivityviewbindingobject = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        MAinclickHandlr = new MainActivityclickhandler(this);
+
+        RecyclerView recyclerview = mainactivityviewbindingobject.recyclerView;
+        recyclerview.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        contactdatabase = database1.getdatabaseinstance(this);
+
+        Myviewmodel viewmodel = new ViewModelProvider(this).get(Myviewmodel.class );
+
+        contact = new entityclass(1,"jackkkk","jackdkkev@gmail.com");
+        viewmodel.addcontact(contact);
+
+        viewmodel.getallcontacts().observe(this,
+                new Observer<List<entityclass>>() {
+                    @Override
+                    public void onChanged(List<entityclass> entityclasses) {//entityclasses is the updates version of contact array list
+                        for(entityclass c : entityclasses){
+                            Log.v("tagy", c.getNamee());
+
+                            contactfinalarraylist.add(c);
+                        }
+                        adapter = new Myadapter(contactfinalarraylist);
+                        adapter.notifyDataSetChanged();
+                    }
+
+
+                }
+        );
+
+        recyclerview.setAdapter(adapter);
+
+
+    }
+}
