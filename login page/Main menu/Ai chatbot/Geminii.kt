@@ -10,14 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Geminii {
-
-
-
-
-
-
-
-
+  
   //  val editText = (R.id.editText)
 
     // val response = generativeModel.generateContent(prompt)
